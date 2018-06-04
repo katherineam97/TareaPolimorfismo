@@ -1,6 +1,6 @@
 #include "Fabrica.h"
 #define MAXIMO 100  // SOLO PUEDEN CAMBIAR 
-
+#include "ZonaFranca.h"
 // DEBE HABER UN .H PARA CADA FABRICA 3 DE CADA TIPO
 // Por cada Fabrica que implementen deben incluir su .h 
 // #include "FabricaVectorEC.h"
@@ -47,8 +47,8 @@ Fabrica * ZonaFranca::getFabrica(const char * tipo, const char * nombre){
 	int i=0;
 	Fabrica * fabricaRetornada = 0;
 	while(!fabricaRetornada && i< cantidadDeFabricas){
-		if(fabrica[i]->esDeTipo(tipo) && fabrica[i]->produce(nombre)){
-			fabricaRetornada = fabrica[i];			
+		if(fabricas[i]->esTipo(tipo) && fabricas[i]->produce(nombre)){
+			fabricaRetornada = fabricas[i];			
 		}
         ++i;
 	}	

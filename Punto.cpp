@@ -79,9 +79,10 @@ double Punto::distancia(Elemento * p){
 	double numero1=0.0;
 	double numero2=0.0;
 
-	denom=sqrt((pow(this->x,2) + (pow(this->y,2))) +  (pow(punto->x,2) + (pow(punto->y,2))));
+	denom=sqrt((pow(this->x,2) + (pow(this->y,2)))) +  sqrt((pow(punto->x,2) + (pow(punto->y,2))));
 	
-	num1= sqrt(pow((punto->x - this->x),2))  + sqrt(pow((punto->y - this->y),2)) ;
+	num1= sqrt(pow((punto->x - this->x),2)  + pow((punto->y - this->y),2));
+	
 	numero1= num1/denom;
 	
 	distancia= numero1;

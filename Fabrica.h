@@ -1,6 +1,7 @@
 #ifndef _FABRICA_ABSTRACTA
 #define _FABRICA_ABSTRACTA
 #include <cstring>
+#include "Producto.h"
 class Fabrica {
 	protected:
 	   char  * nombreProducto;

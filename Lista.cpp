@@ -217,6 +217,7 @@ Lista & Lista::operator+=(Elemento * elemento){
    else {
 	   this->push_front(elemento);
    }
+   return *this;
 }  // Es un push_back que agrega al final de la lista 
 	   
 Lista & Lista::insertar(Lista::Iterator& i, Elemento * elemento){
@@ -297,6 +298,7 @@ Lista & Lista::push_front(Elemento * elemento){
 		primera->anterior = nueva;
 		primera = nueva;
 	}
+	return *this;
 }
 
 Elemento * Lista::pop_front(){

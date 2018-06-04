@@ -3,6 +3,7 @@
 #include "Producto.h"
 #include "Lista.h"
 class Agrupador : public Producto {
+	public:
    	   virtual Lista * agrupar(Lista *)=0;
 };
 
