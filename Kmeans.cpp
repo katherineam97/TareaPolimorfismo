@@ -1,30 +1,38 @@
 #include "Kmeans.h"
 #include "Lista.h"
 
+/*constructor por omision de la clase*/
 Kmeans::Kmeans(){
- tamanoLista=0;
+ tamanoL=0;
 
 }
 
 
-int kmeans::tamanoLista(Lista * lista){
+int Kmeans::tamanoLista(Lista * lista){
 	int tamano=0;
-	for(lista::Iterador i = lista->begin(); i != lista->end(); ++i){
+	for(Lista::Iterator i = lista->begin(); i != lista->end(); ++i){
 		++tamano;
 	}
 	return tamano;
 }
 
-double ** Kmeans::matrizDistancias(Lista * lista, Lista::Iterador cent1, Lista::Iterador cent2){
-	tamanoLista=tamanoLista(lista);
+void Kmeans::reiniciarLista(Lista & lista){
+   for(Lista::Iterator i = lista.begin(); i != lista.end(); ++i){
+	    lista.borrar(i);
+	}	
+}
+
+double ** Kmeans::matrizDistancias(Lista * lista, Lista::Iterator cent1, Lista::Iterator cent2){
+	this->tamanoL=tamanoLista(lista);
 	
-   double ** matriz = new double * [tamanoLista];
-   for(i=0; i < tamanoLista ;++i){
+   double ** matriz = new double * [tamanoL];
+   for(int i=0; i < tamanoL ;++i){
    		matriz[i]= new double[2];
      }
 
-   for(lista::Iterador i = lista->begin(); i != lista->end(); ++i){
-   		for(int x=0; x <tamanoLista;++i){
+	 
+   for( Lista::Iterator i=lista->begin(); i != lista->end(); ++i){
+   		for(int x=0; x <tamanoL;++i){
    			for(int y=0; y < 2; ++i){
    				if(y==0){
    					matriz[x][y]= *i->distancia(*cent1); 
@@ -51,30 +59,33 @@ int Kmeans::distanciaMenor(double distancia1, double distancia2){
 	}
 }
 
-Lista * Kmeans::juntar( Lista * lista){
-	Lista::Iterador cent1=lista->begin();
-	Lista::Iterador cent2= ++cent1;
+Lista * Kmeans::agrupar( Lista * lista){
+	Lista::Iterator cent1=lista->begin();
+	Lista::Iterator cent2= ++(lista->begin());
 	double ** matriz= matrizDistancias(lista,cent1 ,cent2 );
 	Lista * grupo1 = new Lista();
 	Lista * grupo2 = new Lista();
 	Lista * grupos = new Lista();
-	
-	for(int x=0, Lista::Iterador i= lista->begin();  x <tamanoLista && i!= lista->end() ; ++i, ++x){
+Lista::Iterator it= lista->begin();
+
+	for(int x=0;  x < this->tamanoL && it!= lista->end() ; ++it, ++x){
 		if(distanciaMenor(matriz[x][0], matriz[x][1])==0){
-			grupo1 +=  *i;
+			grupo1 +=  *it;
 		}else{
-			grupo2+= *i;
+			grupo2+= *it;
 
 		}
 
 	}
-	
-	//DENTRO DEL WHILE
-	double * vector1= new double[grupo1->tamanoLista()];
-	double * vector2= new double[grupo2->tamanoLista()];
+        
+	for(int n=0; n<50; ++n){
+//empieza la busqueda de los centroides
+	double * vector1= new double[tamanoLista(grupo1)];// se inicializan vectores para encontrar la posicion del mas cercano al centroide anterior
+	double * vector2= new double[tamanoLista(grupo2)];
 	int i=0;
 	int j=0;
-	for(int x=0, Lista::Iterador i= lista->begin();  x < lista->tamanoLista() && i!= lista->end() ; ++i, ++x){
+	it= lista->begin();
+	for(int x=0;  x < tamanoLista(lista) && it!= lista->end() ; ++it, ++x){
 		if(distanciaMenor(matriz[x][0], matriz[x][1])==0){
 			vector1[i]=matriz[x][0];
 			++i;
@@ -89,7 +100,7 @@ Lista * Kmeans::juntar( Lista * lista){
 	int pos1=0;
 	int pos2=0;
 	double menor= vector1[0];
-	for(int a=0; a<grupo1->tamanoLista();++a){
+	for(int a=0; a<tamanoLista(grupo1);++a){//busqueda del menor para centroide 1
 		if(vector1[a]< menor){
 			pos1=a;
 			menor= vector1[a];
@@ -97,34 +108,43 @@ Lista * Kmeans::juntar( Lista * lista){
 	}
 	
 	menor=vector2[0];
-	for(a=0; a<grupo2->tamanoLista();++a){
+	for(a=0; a<tamanoLista(grupo2);++a){//busqueda del menor centroide 2
 		if(vector2[a]< menor){
 			pos2=a;
 			menor= vector2[a];
 		}	
 	}
-	//BORRAR VECTORES
+
+	delete []vector1;
+	delete []vector2;
+        vector1=0;
+	vector2=0;
 	
     matriz= matrizDistancias(lista,centroide(grupo1, pos1) , centroide(grupo2,pos2));
-    //Hay que reiniciar las listas de grupo1 y grupo2
-	//REPETIR PROCESO UTILIZANDO EL METODO DE BUSCAR CENTROIDES PERO A PARTIR DE LA SEGUNDA ITERACION LA ANTERIOR ES LA PRIMERA
-     
-    /*for(int x=0, lista->Lista::Iterador i;  x <tamanoLista && i!= lista->end() ; ++i, ++x){
+    
+    reiniciarLista(*grupo1);
+    reiniciarLista(*grupo2);
+	
+    for(int x=0, Lista::Iterator it= lista->begin();  x <this->tamanoL && it!= lista->end() ; ++it, ++x){
 		if(distanciaMayor(matriz[x][0], matriz[x][1])==0){
-			grupo1 +=  i.getElemento();
+			grupo1 +=  *it;
 		}else{
-			grupo2+= i.getElemento();
+			grupo2+= *it;
 
 		}
 
-	}*/
+	}
+        }
 
 	grupos+= grupo1;
 	grupos+= grupo2;
+	grupo1->~Lista();
+	grupo2->~Lista();
+
 	return grupos;
 }
 
-Lista::Iterador Kmeans::centroide(Lista * lista, int pos){
+Lista::Iterator Kmeans::centroide(Lista * lista, int pos){
 	Lista::Iterator nuevo; 
 	for(int a=0, Lista::Iterator i=lista->begin(); a<pos ;++i){
 		nuevo=i;
@@ -134,9 +154,4 @@ Lista::Iterador Kmeans::centroide(Lista * lista, int pos){
 
 }
 
-Lista * Kmeans::agrupar(Lista * lista){
 
-
-
-
-}
