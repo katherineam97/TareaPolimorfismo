@@ -82,6 +82,8 @@ int Kmeans::distanciaMenor(double distancia1, double distancia2){
 */
 Lista * Kmeans::agrupar( Lista * lista){
 	
+	
+	if ( ++(lista->begin()) != NULL){//si hay mas de un elementoen lista
 	//se escogen los dos primeros centroides de manera aleatoria
 	Lista::Iterator cent1=lista->begin();
 	Lista::Iterator cent2= ++(lista->begin());
@@ -168,6 +170,13 @@ Lista * Kmeans::agrupar( Lista * lista){
 	grupo2->~Lista();
 
 	return grupos;
+	
+	}else{//si solo hay un elemento en lista se retorna a ella misma
+		
+		return lista;
+	
+	}
+	
 }
 
 
@@ -178,7 +187,7 @@ Lista * Kmeans::agrupar( Lista * lista){
 Lista::Iterator Kmeans::centroide(Lista * lista, int pos){
 	Lista::Iterator nuevo; 
 	Lista::Iterator i=lista->begin();
-	for(int a=0; a<pos ;++i){
+	for(int a=0; a<pos && i!= lista->end() ;++i){
 		nuevo=i;
 	}
 
