@@ -1,6 +1,7 @@
 #include<iostream>
 #include <stdio.h>
 #include <math.h>
+#include<cstring>
 #include "Elemento.h"
 #include "Punto.h"
 
@@ -53,7 +54,13 @@ ostream & Punto::imprimir(ostream & salida){
 @return salida
 */
 istream & Punto::cargar(istream & entrada){
-
+	string cad;
+	const char separador[2] = ",";
+	getline(entrada, cad);
+	char * tira = strtok((char *)cad.c_str(), separador);							
+	this->x = stoi(tira);				
+	tira = strtok(NULL, separador);		
+	this->y=stoi(tira);
 	
    return entrada;
 }
@@ -73,19 +80,17 @@ double Punto::distancia(Elemento * p){
 	double distancia=1.0;
 	if(punto){
 	
-	double num1= 0.0;
-	double num2= 0.0;
+	double num= 0.0;
 	double denom =0.0;
-	double numero1=0.0;
-	double numero2=0.0;
-
+	double numero=0.0;
+	
+	num= sqrt(pow((punto->x - this->x),2)  + pow((punto->y - this->y),2));
+	
 	denom=sqrt((pow(this->x,2) + (pow(this->y,2)))) +  sqrt((pow(punto->x,2) + (pow(punto->y,2))));
 	
-	num1= sqrt(pow((punto->x - this->x),2)  + pow((punto->y - this->y),2));
+	numero= num/denom;
 	
-	numero1= num1/denom;
-	
-	distancia= numero1;
+	distancia= numero;
 	
 	delete punto;
 	punto=0;

@@ -3,6 +3,7 @@
 #include<iostream>
 #include <stdio.h>
 #include <math.h>
+#include<cstring>
 #include "Elemento.h"
 using namespace std;
 
