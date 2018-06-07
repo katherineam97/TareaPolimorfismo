@@ -18,20 +18,27 @@ void XML::visualizar(Lista * objetos)
 	else{
 		
 		// Inicia con la escritura del codigo XML
-		archivo<<"<?xml version='1.0' encoding='UTF-8' ?>";
-		
+		archivo<<"<?xml version='1.0' encoding='UTF-8' ?>"<<endl;
+		archivo<< "<grupos>"<<endl;
 		for(Lista::Iterator i = objetos->begin(); i != objetos->end(); ++i){
 			
 			if(dynamic_cast<Lista *>(*i)){
 				
-				archivo<<"<grupo>";
+				archivo<<"<grupo>"<<endl;
+				archivo<<"<elemento>";
 				archivo<<*i;	
-				archivo<<"</grupo>";
+				archivo<<"</elemento>"<<endl;	
+				archivo<<"</grupo>"<<endl;
 				
 				
+			}else{
+				archivo<<"<elemento>";
+				archivo<<*i;	
+				archivo<<"</elemento>"<<endl;
 			}
 			
 		}
+		archivo<< "</grupos>"<<endl;
 		
 		
 		
