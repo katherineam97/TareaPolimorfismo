@@ -46,19 +46,13 @@ void HAC::matrizDistancias(Lista * lista){
 	}
 	
 	
-	for(int x=0; x <tamanoL ; ++x){
-   		for(int y=0; y < tamanoL; ++y){
-		cout<<matriz[x][y]<<" ";
-		}
-	cout<<endl;
-	}
 	//encuentra el menor dentro de la matriz creada
 	//cada vez que se cree la matriz ya se sabe cuales son las posiciones(i,j) del menor
 	
 	double menor = matriz[0][1];
 	i=0;
 	j=1;
-	cout<<"menor: "<<menor<<endl;
+	
 	for(int x=0; x <tamanoL ; ++x){
    		for(int y=0; y < tamanoL; ++y){
 			
@@ -71,7 +65,7 @@ void HAC::matrizDistancias(Lista * lista){
 		}
 	}
 
-	cout<<"i: "<<i<<" j: "<<j<<endl;
+	
 	for(int n=0; n <tamanoL ; ++n){
 	delete [] matriz[n];
 	}
@@ -92,18 +86,26 @@ void HAC::vectorDistancias(Lista * lista1, Lista * lista2){
    double * vector = new double [tamanoL];
 
 	 
-	Lista::Iterator i=lista1->begin();
-   	for(int x=0; x <tamanoL &&  i != lista1->end(); ++x, ++i){
-   		
+	int x=0;
+	cout<<" DISTANCIA "<<(*lista1->begin())->distancia(lista2)<<endl;
+   for(Lista::Iterator i = lista1->begin(); i != lista1->end() && x<tamanoL ; ++i, ++x){
+			cout<<" "<<(*i)->distancia(lista2)<<endl;
 			vector[x]= (*i)->distancia(lista2);
-
    		
    	}
 	
+	cout<<"vector: ";
+	for(int x=0; x <tamanoL ; ++x){
+   		
+			cout<<vector[x]<<" ";
+   		
+   	}
+	cout<<endl;
 	
 	//encuentra el menor dentro de el vector creada
 	//cada vez que se cree el vector ya se sabe cuales son las posiciones(i,j) del menor
-	int menor =vector[0];
+	double menor =vector[0];
+	cout<<"menor "<<menor;
 	for(int x=0; x <tamanoL ; ++x){
    		
 		if (vector[x]< menor){
@@ -112,6 +114,8 @@ void HAC::vectorDistancias(Lista * lista1, Lista * lista2){
 			this->j=x;
 		}
 	}
+	cout<<endl;
+	cout<<"i: "<<this->i<<" j: "<<j<<endl;
    		
    delete [] vector;
    vector=0;
@@ -165,14 +169,14 @@ Lista * HAC::agrupar(Lista * lista){
 		
 		lista->borrar(nuevo);//borra en la lista original los elementos que ya fueron agregados 
 		
-		cout<<"lista:"<<endl<<lista<<endl;	
-		
 		lista->borrar(nuevo2);//borra en la lista original los elementos que ya fueron agregados 
 		
 		cout<<"lista:"<<endl<<lista<<endl;
 		
+		
 		while(lista->begin() != NULL){
 			
+			cout<<"lista1:"<<endl<<lista1<<endl;
 			*lista2 += lista1; //agrega lo que hay en la lista1
 			cout<<"lista2:"<<endl<<lista2<<endl;
 			vectorDistancias(lista,lista1);//este metodo, al igual que matriz distancias llena el i y el j para saber la posicion del mas cercano
@@ -183,10 +187,12 @@ Lista * HAC::agrupar(Lista * lista){
 			nuevo= buscarIterador(lista,i);
 			
 			lista->borrar(nuevo);//se borra lo que ya se agrego
-			
+			cout<<"lista:"<<endl<<lista<<endl;	
 			reiniciarLista(*lista1);
+			cout<<"lista1:"<<endl<<lista1<<endl;	
 			*lista1 += lista2;
-			reiniciarLista(*lista2);			
+			reiniciarLista(*lista2);	
+			cout<<"lista2:"<<endl<<lista2<<endl;			
 		}
 		
 		lista2->~Lista();
