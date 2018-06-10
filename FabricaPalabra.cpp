@@ -1,8 +1,8 @@
 #include "FabricaPalabra.h"
 #include "Palabra.h"
-
-FabricaPalabra::FabricaPalabra(){
-	Fabrica("Elemento","Palabra");
+#include "Producto.h"
+#include "Fabrica.h"
+FabricaPalabra::FabricaPalabra():Fabrica("Elemento","Palabra"){
 	
 }
 Producto * FabricaPalabra::producir(){//implementacion del metodo producir() perteneciente a la clase fabrica, devuelve una instancia de un  Palabra

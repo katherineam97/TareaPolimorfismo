@@ -1,10 +1,10 @@
 #include "FabricaJson.h"
 #include "Json.h"
+#include "Producto.h"
+#include "Fabrica.h"
 
 
-
-FabricaJson::FabricaJson(){
-	Fabrica("Visualizador","Json");
+FabricaJson::FabricaJson():Fabrica("Visualizador","Json"){
 	
 }
 Producto * FabricaJson::producir(){//implementacion del metodo producir() perteneciente a la clase fabrica, devuelve una instancia de un visualizador Json
