@@ -6,7 +6,7 @@ using namespace std;
 #include "Agrupador.h"
 #include "Visualizador.h"
 #include "Lista.h"
-
+#include<fstream>
 int main( int argc, char ** argv){
    if(argc < 5){
       cout << "Uso: agrupador elemento algoritmoDeClustering visualizador datos.txt"<< endl;	   
