@@ -1,0 +1,10 @@
+{ 
+"grupos" : {
+"grupo" : {
+"elemento" : "{ 1,2 }"
+}
+"grupo" : {
+"elemento" : "{ 3,4 , 5,4 }"
+}
+}
+}

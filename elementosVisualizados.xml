@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<grupos>
+<grupo>
+<elemento>{ 9,8,7,6 }</elemento>
+</grupo>
+<grupo>
+<elemento>{ 2,4,5,4 , 1,1,5,4 }</elemento>
+</grupo>
+</grupos>

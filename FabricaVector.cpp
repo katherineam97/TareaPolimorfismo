@@ -3,7 +3,7 @@
 #include "Producto.h"
 #include "Fabrica.h"
 
-FabricaVector::FabricaVector():Fabrica("Elemento","Vector"){
+FabricaVector::FabricaVector():Fabrica("elemento","Vector"){
 	
 }
 Producto * FabricaVector::producir(){//implementacion del metodo producir() perteneciente a la clase fabrica, devuelve una instancia de un  Vector

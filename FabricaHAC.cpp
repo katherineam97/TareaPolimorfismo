@@ -4,7 +4,7 @@
 #include "Fabrica.h"
 
 
-FabricaHAC::FabricaHAC():Fabrica("Agrupador","HAC"){
+FabricaHAC::FabricaHAC():Fabrica("agrupador","HAC"){
 	
 }
 Producto * FabricaHAC::producir(){//implementacion del metodo producir() perteneciente a la clase fabrica, devuelve una instancia de un agruapdor HAC

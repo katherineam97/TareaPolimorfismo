@@ -38,7 +38,7 @@ void Json::visualizar(Lista * objetos)
 			
 		}
 		archivo<< "}"<<endl;
-		
+		archivo<< "}"<<endl;
 		
 		
 		

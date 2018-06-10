@@ -2,7 +2,7 @@
 #include "Punto.h"
 #include "Producto.h"
 #include "Fabrica.h"
-FabricaPunto::FabricaPunto():Fabrica("Elemento","Punto"){
+FabricaPunto::FabricaPunto():Fabrica("elemento","Punto"){
 	
 }
 Producto * FabricaPunto::producir(){//implementacion del metodo producir() perteneciente a la clase fabrica, devuelve una instancia de un  Punto

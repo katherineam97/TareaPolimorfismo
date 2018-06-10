@@ -1,15 +1,14 @@
 #include "Fabrica.h"
 #define MAXIMO 100  
 #include "ZonaFranca.h"
-// DEBE HABER UN .H PARA CADA FABRICA 3 DE CADA TIPO
-// Por cada Fabrica que implementen deben incluir su .h 
-// #include "FabricaVectorEC.h"
- #include "FabricaPunto.h"
+
+#include "FabricaVector.h"
+#include "FabricaPunto.h"
 #include "FabricaPalabra.h"
 #include "FabricaHAC.h"
- #include "FabricaKmeans.h"
+#include "FabricaKmeans.h"
 // #include "FabricaAgrupador_HAPPYFACE_INICIALES.h"
-// #include "FabricaSVG.h"
+#include "FabricaSVG.h"
 #include "FabricaXML.h"
  #include "FabricaJson.h"
 
@@ -31,10 +30,11 @@ ZonaFranca::ZonaFranca(){
 	
 	agregar(new FabricaPalabra());
 	agregar(new FabricaPunto());
-	//agregar(new FabricaVector());
+	agregar(new FabricaVector());
 	
 	agregar(new FabricaJson());
 	agregar(new FabricaXML());
+	agregar(new FabricaSVG());
 	
 	
 }

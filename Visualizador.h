@@ -4,6 +4,7 @@
 #include "Lista.h"
 
 class Visualizador : public Producto {
+	public:
    	   virtual void visualizar( Lista * )=0;//metodo para visualizar los elemento de la lista que recibe de parametro en unformato especifico implementado en cada clase que herede de agrupador
 };
 

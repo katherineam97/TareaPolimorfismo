@@ -3,7 +3,7 @@
 #include "Producto.h"
 #include "Fabrica.h"
 
-FabricaXML::FabricaXML():Fabrica("Visualizador","XML"){
+FabricaXML::FabricaXML():Fabrica("visualizador","XML"){
 	
 }
 	

@@ -2,7 +2,7 @@
 #include "SVG.h"
 #include "Producto.h"
 #include "Fabrica.h"
-FabricaSVG::FabricaSVG():Fabrica("Visualizador","SVG"){
+FabricaSVG::FabricaSVG():Fabrica("visualizador","SVG"){
 	
 }
 Producto * FabricaSVG::producir(){//implementacion del metodo producir() perteneciente a la clase fabrica, devuelve una instancia de un  SVG
