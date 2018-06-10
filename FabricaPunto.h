@@ -4,7 +4,9 @@
 #include "Fabrica.h"
 #include "Punto.h"
 class FabricaPunto : public Fabrica{//hereda de la clase fabrica
+	public:
 	Producto * producir();
+	FabricaPunto();
 
 };
 

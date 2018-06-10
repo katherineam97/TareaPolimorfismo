@@ -4,7 +4,9 @@
 #include "Fabrica.h"
 #include "XML.h"
 class FabricaXML : public Fabrica{//hereda de la clase fabrica
+	public:
 	Producto * producir();
+	FabricaXML();
 
 };
 

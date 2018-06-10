@@ -4,8 +4,9 @@
 #include "Fabrica.h"
 #include "Json.h"
 class FabricaJson : public Fabrica{//hereda de la clase fabrica
+	public:
 	Producto * producir();
-
+	FabricaJson();
 };
 
 #endif

@@ -1,7 +1,10 @@
 #include "FabricaPalabra.h"
 #include "Palabra.h"
 
-Producto * FabricaPalabra::producir(){//implementacion del metodo producir() perteneciente a la clase fabrica, devuelve una instancia del elemento palabra
-   Palabra * palabra = new Palabra();
-   return palabra;
+FabricaPalabra::FabricaPalabra(){
+	Fabrica("Elemento","Palabra");
+	
+}
+Producto * FabricaPalabra::producir(){//implementacion del metodo producir() perteneciente a la clase fabrica, devuelve una instancia de un  Palabra
+   return dynamic_cast<Producto * >(dynamic_cast<Elemento * >(new Palabra()));
 }

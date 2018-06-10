@@ -1,17 +1,17 @@
 #include "Fabrica.h"
-#define MAXIMO 100  // SOLO PUEDEN CAMBIAR 
+#define MAXIMO 100  
 #include "ZonaFranca.h"
 // DEBE HABER UN .H PARA CADA FABRICA 3 DE CADA TIPO
 // Por cada Fabrica que implementen deben incluir su .h 
 // #include "FabricaVectorEC.h"
-// #include "FabricaHilera_OPCIONAL_INICIALES.h"
-// #include "FabricaPalabra_INICIALES.h"
-// #include "FabricaHAC_INICIALES.h"
-// #include "FabricaKMeans_INICIALES.h"
+ #include "FabricaPunto.h"
+#include "FabricaPalabra.h"
+#include "FabricaHAC.h"
+ #include "FabricaKmeans.h"
 // #include "FabricaAgrupador_HAPPYFACE_INICIALES.h"
-// #include "FabricaSVG_INICIALES.h"
-// #include "FabricaXML_INICIALES.h"
-// #include "FabricaJSON_INICIALES.h"
+// #include "FabricaSVG.h"
+#include "FabricaXML.h"
+ #include "FabricaJson.h"
 
 void ZonaFranca::agregar(Fabrica * fabrica){
 	if(cantidadDeFabricas < MAXIMO){
@@ -25,14 +25,17 @@ ZonaFranca::ZonaFranca(){
 		fabricas[i]=0;
 	}
 	cantidadDeFabricas=0;
-	// SI HAY MAS QUE LO QUE INDICA EL VALOR "MAXIMO" DEBE AUMENTARLO EN EL .H
-    // USTED AGREGAR INSTANCIAS DE FABRICA ESPECIFICAS 
-	//agregar(new FabricaVectorEC());
-	//agregar(new FabricaHAC());
-	//agregar(new FabricaSVG());
-	// 3 Fabricas de Elemento
-	// 3 Fabricas de Agrupador
-	// 3 Fabricas de Visualizador
+
+	agregar(new FabricaHAC());
+	agregar(new FabricaKmeans());
+	
+	agregar(new FabricaPalabra());
+	agregar(new FabricaPunto());
+	//agregar(new FabricaVector());
+	
+	agregar(new FabricaJson());
+	agregar(new FabricaXML());
+	
 	
 }
 
