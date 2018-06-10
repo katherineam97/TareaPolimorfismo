@@ -18,7 +18,7 @@ void XML::visualizar(Lista * objetos)
 	else{
 		
 		// Inicia con la escritura del codigo XML
-		archivo<<"<?xml version='1.0' encoding='UTF-8' standalone="yes"?>"<<endl;
+		archivo<<"<?xml version='1.0' encoding='UTF-8' standalone=\"yes\"?>"<<endl;
 		archivo<< "<grupos>"<<endl;
 		for(Lista::Iterator i = objetos->begin(); i != objetos->end(); ++i){
 			
