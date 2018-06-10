@@ -80,46 +80,38 @@ y encuentra la posicion del elemento mas cercano (el de la distancia menor)
  @param lista1, lista2
  @return vector 
 */
-void HAC::vectorDistancias(Lista * lista1, Lista * lista2){
+int HAC::vectorDistancias(Lista * lista1, Lista * lista2){
+	int pos=0;
 	int tamanoL=tamanoLista(lista1);
 	
-   double * vector = new double [tamanoL];
+    double * vector = new double [tamanoL];
 
 	 
 	int x=0;
-	cout<<" DISTANCIA "<<(*lista1->begin())->distancia(lista2)<<endl;
+	
    for(Lista::Iterator i = lista1->begin(); i != lista1->end() && x<tamanoL ; ++i, ++x){
-			cout<<" "<<(*i)->distancia(lista2)<<endl;
-			vector[x]= (*i)->distancia(lista2);
+			vector[x]= lista2->distancia(*i);
    		
    	}
 	
-	cout<<"vector: ";
-	for(int x=0; x <tamanoL ; ++x){
-   		
-			cout<<vector[x]<<" ";
-   		
-   	}
-	cout<<endl;
 	
 	//encuentra el menor dentro de el vector creada
 	//cada vez que se cree el vector ya se sabe cuales son las posiciones(i,j) del menor
-	double menor =vector[0];
-	cout<<"menor "<<menor;
-	for(int x=0; x <tamanoL ; ++x){
-   		
-		if (vector[x]< menor){
-			menor=vector[x];
-			this->i=x;
-			this->j=x;
+	double menor = vector[0];
+	pos=0;
+	
+	for(int y=0; y < tamanoL; ++y){
+			
+		if ( vector[y]< menor ){
+			menor=vector[y];
+			pos=y;
+			
 		}
-	}
-	cout<<endl;
-	cout<<"i: "<<this->i<<" j: "<<j<<endl;
+		}
    		
    delete [] vector;
    vector=0;
-	
+	return pos;
 }
 
 /**Metodo que recorre la lista y va borrando todo lo que hay en ella, "la vacia"
@@ -157,8 +149,6 @@ Lista * HAC::agrupar(Lista * lista){
 		Lista * lista2 = new Lista();
 		
 		matrizDistancias(lista);//calcula la posicion de los dos elementos mas cercanos en lista. i, j son atributos de la clase y son "llenados" en este metodo
-		cout<<"elemento i: "<<*buscarIterador(lista, i)<<endl;
-		cout<<"elemento j: "<<*buscarIterador(lista, j)<<endl;
 		
 		*lista1 += *buscarIterador(lista, i);//agrega los dos mas cercanos, busca el elemento en la posicion i de la lista
 		*lista1 += *buscarIterador(lista, j);//agrega los dos mas cercanos, busca el elemento en la posicion j de la lista
@@ -170,29 +160,25 @@ Lista * HAC::agrupar(Lista * lista){
 		lista->borrar(nuevo);//borra en la lista original los elementos que ya fueron agregados 
 		
 		lista->borrar(nuevo2);//borra en la lista original los elementos que ya fueron agregados 
-		
-		cout<<"lista:"<<endl<<lista<<endl;
-		
-		
+				
 		while(lista->begin() != NULL){
 			
-			cout<<"lista1:"<<endl<<lista1<<endl;
 			*lista2 += lista1; //agrega lo que hay en la lista1
-			cout<<"lista2:"<<endl<<lista2<<endl;
-			vectorDistancias(lista,lista1);//este metodo, al igual que matriz distancias llena el i y el j para saber la posicion del mas cercano
-			//en este caso solo se calcula 1 elemento por lo que dentro de este while todo se maneja con la variable i 
+			
+			this->i=vectorDistancias(lista,lista1);//este metodo encuentra la posicion del mas cercano con lista1. Distancia entre todos los elementos de lista con el elemento lista1
+			
 			
 			*lista2 += *buscarIterador(lista, i);//agrega el elemento que calculo vector distancias como el mas cercano a lista1
 			
 			nuevo= buscarIterador(lista,i);
 			
 			lista->borrar(nuevo);//se borra lo que ya se agrego
-			cout<<"lista:"<<endl<<lista<<endl;	
+			
 			reiniciarLista(*lista1);
-			cout<<"lista1:"<<endl<<lista1<<endl;	
+				
 			*lista1 += lista2;
 			reiniciarLista(*lista2);	
-			cout<<"lista2:"<<endl<<lista2<<endl;			
+						
 		}
 		
 		lista2->~Lista();
