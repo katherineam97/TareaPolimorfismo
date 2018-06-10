@@ -3,7 +3,7 @@
 #include "Producto.h"
 #include "Fabrica.h"
 #include "Kmeans.h"
-class FabricaKmeans : Fabrica {//hereda de la clase fabrica
+class FabricaKmeans : public Fabrica {//hereda de la clase fabrica
 	Producto * producir();
 
 };

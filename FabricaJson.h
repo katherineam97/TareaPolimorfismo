@@ -3,7 +3,7 @@
 #include "Producto.h"
 #include "Fabrica.h"
 #include "Json.h"
-class FabricaJson : Fabrica{//hereda de la clase fabrica
+class FabricaJson : public Fabrica{//hereda de la clase fabrica
 	Producto * producir();
 
 };

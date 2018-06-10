@@ -3,7 +3,7 @@
 #include "Producto.h"
 #include "Fabrica.h"
 #include "XML.h"
-class FabricaXML : Fabrica{//hereda de la clase fabrica
+class FabricaXML : public Fabrica{//hereda de la clase fabrica
 	Producto * producir();
 
 };

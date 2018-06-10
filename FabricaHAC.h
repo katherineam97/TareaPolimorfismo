@@ -3,8 +3,10 @@
 #include "Producto.h"
 #include "Fabrica.h"
 #include "HAC.h"
-class FabricaHAC : Fabrica{//hereda de la clase fabrica
+class FabricaHAC : public Fabrica{//hereda de la clase fabrica
+	public:
 	Producto * producir();
+	FabricaHAC();
 
 };
 
