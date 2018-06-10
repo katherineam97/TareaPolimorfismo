@@ -7,7 +7,7 @@
 #include "FabricaPalabra.h"
 #include "FabricaHAC.h"
 #include "FabricaKmeans.h"
-// #include "FabricaAgrupador_HAPPYFACE_INICIALES.h"
+#include "FabricaDBSCAN.h"
 #include "FabricaSVG.h"
 #include "FabricaXML.h"
  #include "FabricaJson.h"
@@ -27,6 +27,7 @@ ZonaFranca::ZonaFranca(){
 
 	agregar(new FabricaHAC());
 	agregar(new FabricaKmeans());
+	agregar(new FabricaDBSCAN());		// Fabrica DBSCAN agregada
 	
 	agregar(new FabricaPalabra());
 	agregar(new FabricaPunto());

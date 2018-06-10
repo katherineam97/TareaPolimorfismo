@@ -58,7 +58,12 @@ ostream & Vector::imprimir(ostream & salida)
 		// Ciclo que recorre el vector
 		for (int i = 0; i < this->dimension; ++i)
 		{
-			salida << vector[i] << " ";
+			//salida << i << " "; 
+			salida << vector[i];
+			
+			if(i< this->dimension-1){
+				salida << ", ";
+			}
 		}
 		salida << "]" << endl;
 	}
@@ -70,40 +75,17 @@ ostream & Vector::imprimir(ostream & salida)
 @param entrada, que es un flujo de datos de un archivo
 @return entrada
 */
-istream & Vector::cargar(istream & entrada) //SUPONGO QUE AQUI RECIBE EL ISTREAM DEL ARCHIVO
+istream & Vector::cargar(istream & entrada) //SUPONGO QUE AQUI RECIBE EL ISTREAM DEL ARCHIVO y el datosVector.txt tal como en el ejemplo
 {
-	//int cont = 0;							// Contador para la cantidad de numeros de un vector
-	int i = 0;								// Variable para manejar la posicion del vector
-	
-	//Separacion por comas, para devolver la cantidad de elementos para crear el vector en memoria
-	const char separator[2] = ",";
-	string cadena;
-	string cadenaCopia;
-	
-	/*	//SI DE UNA VEZ SE PIDE EL LEER TODOS LOS ELEMENTOS, ES ASÍ PARA TENER LA CANTIDAD DE ELEMENTOS
-		string cadena_num_vectores = "";
-		int numVectores =0;
-		getline(entrada,cadena_num_vectores);
-		numVectores = atoi(const_cast <char*> (cadena_num_vectores.c_str()));
-	*/
-	//while(getline(entrada, cadena)){			Posteriormente lee cada linea de texto mientras no sea el final de istream
-		getline(entrada, cadena);
-		cadenaCopia = cadena;
-		char * temporal =  const_cast <char*> (cadenaCopia.c_str());
-		// Por medio de las funciones set cuenta_Numeros, se devuelve la cantidad de numeros de un vector
-		set_Dimension(cuenta_Numeros(temporal, separator));				
-		char * vec = strtok((char *)cadena.c_str(), separator);			// Usa funcion strtok para comenzar a separar cada elemento de la linea
-		//Se reserva el espacio de memoria para el atributo de la clase que se llenará
-		this->vector = new double[this->dimension];	
-		
-		while(vec != NULL)						// Mientras la hilera de vectores sea distinta de null
-		{ 
-			double num = atof(vec);				// Se usa la funcion atof() para convertir un *char a double
-			this->vector[i] = num;				// Se asigna a vector[i] el numero obtenido
-			vec = strtok(NULL, separator);		// A vec le asigno de nuevo strtok() para que busque otro separador, 
-														// le coloque \0 y lea el string anterior al separador
-		}
-	//}
+	int i = 0;										// Variable para manejar la posicion del vector
+	entrada >> i;									// Obtengo la dimension
+	this->set_Dimension(i);
+	this->vector = new double[this->dimension];
+	// Recorre el puntero a double llenandolo con el flujo del fstream entrada
+	for(int index = 0; index < this->dimension; ++index)
+	{
+		entrada >> this->vector[index];
+	}
 	return entrada;
 }
 
